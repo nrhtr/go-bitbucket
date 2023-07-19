@@ -200,7 +200,6 @@ type DefaultReviewer struct {
 	Links       map[string]map[string]string
 }
 
-
 type DefaultReviewers struct {
 	Page             int
 	Pagelen          int

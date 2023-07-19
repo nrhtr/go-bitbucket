@@ -190,6 +190,7 @@ func injectClient(a *auth) *Client {
 		Webhooks:           &Webhooks{c: c},
 		Downloads:          &Downloads{c: c},
 		DeployKeys:         &DeployKeys{c: c},
+		Deployments:        &Deployments{c: c},
 	}
 	c.Users = &Users{c: c}
 	c.User = &User{c: c}
@@ -213,6 +214,10 @@ func (c *Client) GetApiHostnameURL() string {
 
 func (c *Client) SetApiBaseURL(urlStr url.URL) {
 	c.apiBaseURL = &urlStr
+}
+
+func (c *Client) SetPagelen(pagelen int) {
+	c.Pagelen = pagelen
 }
 
 func (c *Client) executeRaw(method string, urlStr string, text string) (io.ReadCloser, error) {
@@ -401,7 +406,9 @@ func (c *Client) doPaginatedRequest(req *http.Request, page *int, emptyResponse 
 				return resBody, err
 			}
 			c.authenticateRequest(newReq)
+
 			resp, err := c.doRawRequest(newReq, false)
+
 			if err != nil {
 				return resBody, err
 			}
@@ -410,6 +417,7 @@ func (c *Client) doPaginatedRequest(req *http.Request, page *int, emptyResponse 
 			json.NewDecoder(resp).Decode(responsePaginated)
 			values = append(values, responsePaginated.Values...)
 		}
+
 		responsePaginated.Values = values
 		responseBytes, err = json.Marshal(responsePaginated)
 		if err != nil {
@@ -421,6 +429,7 @@ func (c *Client) doPaginatedRequest(req *http.Request, page *int, emptyResponse 
 	if err := json.Unmarshal(responseBytes, &result); err != nil {
 		return resBody, err
 	}
+
 	return result, nil
 }
 
