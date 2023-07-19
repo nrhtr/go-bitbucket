@@ -3,10 +3,26 @@ package bitbucket
 import (
 	"encoding/json"
 	"net/url"
+	"time"
 )
 
 type Commits struct {
 	c *Client
+}
+
+type Commit struct {
+	Hash   string     `json:"hash"`
+	Date   *time.Time `json:"date"`
+	Author struct {
+		Raw  string `json:"raw"`
+		User struct {
+			DisplayName string `json:"display_name"`
+		} `json:"user"`
+		UUID      string `json:"uuid"`
+		AccountID string `json:"account_id"`
+		Nickname  string `json:"nickname"`
+	} `json:"author"`
+	Message string `json:"string"`
 }
 
 func (cm *Commits) GetCommits(cmo *CommitsOptions) (interface{}, error) {

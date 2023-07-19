@@ -240,7 +240,7 @@ type RepositoryBranchDeleteOptions struct {
 	RepoSlug string `json:"repo_slug"`
 	RepoUUID string `json:"uuid"`
 	RefName  string `json:"name"`
-	RefUUID  string `json:uuid`
+	RefUUID  string `json:"ref_uuid"`
 }
 
 type RepositoryBranchTarget struct {
@@ -554,4 +554,10 @@ type DeployKeyOptions struct {
 	Id       int    `json:"id"`
 	Label    string `json:"label"`
 	Key      string `json:"key"`
+}
+
+type DeploymentsOptions struct {
+	Owner    string `json:"owner"`
+	RepoSlug string `json:"repo_slug"`
+	Uuid     string `json:"deployment_uuid"`
 }

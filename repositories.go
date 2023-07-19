@@ -19,6 +19,7 @@ type Repositories struct {
 	Webhooks           *Webhooks
 	Downloads          *Downloads
 	DeployKeys         *DeployKeys
+	Deployments        *Deployments
 	repositories
 }
 
