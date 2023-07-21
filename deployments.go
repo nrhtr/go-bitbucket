@@ -19,15 +19,18 @@ type Deployment struct {
 		} `mapstructure:"commit" json:"commit"`
 		CreatedOn *time.Time `mapstructure:"created_on" json:"created_on"`
 	} `mapstructure:"deployable" json:"deployable"`
-	Number  int `mapstructure:"number" json:"number"`
+	Number      int `mapstructure:"number" json:"number"`
+	Environment struct {
+		UUID string `mapstructure:"uuid" json:"uuid"`
+	} `mapstructure:"environment" json:"environment"`
 	Release struct {
 		Name      string     `mapstructure:"name" json:"name"`
 		CreatedOn *time.Time `mapstructure:"created_on" json:"created_on"`
-	}
+	} `mapstructure:"release" json:"release"`
 	State struct {
 		Type string `mapstructure:"deployment_state_undeployed" json:"deployment_state_undeployed"`
 		Name string `mapstructure:"name" json:"name"`
-	}
+	} `mapstructure:"state" json:"state"`
 }
 
 func (p *Deployments) Gets(po *DeploymentsOptions) ([]*Deployment, error) {
