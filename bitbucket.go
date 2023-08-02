@@ -560,4 +560,5 @@ type DeploymentsOptions struct {
 	Owner    string `json:"owner"`
 	RepoSlug string `json:"repo_slug"`
 	Uuid     string `json:"deployment_uuid"`
+	Query    string `json:"query"`
 }
